@@ -1,3 +1,38 @@
 name: "Open WebUI CFM"
+version: "2026.09.01"
 slug: "open-webui-cfm"
 description: "Open WebUI for Home Assistant"
+url: "https://github.com/carferrer/open-webui-cfm"
+
+arch:
+  - amd64
+  - aarch64
+
+startup: application
+boot: auto
+init: false
+
+ingress: true
+ingress_port: 8080
+panel_icon: "mdi:robot"
+panel_title: "Open WebUI"
+panel_admin: false
+
+ports:
+  8080/tcp: 3000
+ports_description:
+  8080/tcp: "Open WebUI"
+
+map:
+  - type: data
+    read_only: false
+
+options:
+  webui_auth: true
+  ollama_base_url: "http://homeassistant.local:11434"
+  webui_secret_key: ""
+
+schema:
+  webui_auth: bool
+  ollama_base_url: str
+  webui_secret_key: password
