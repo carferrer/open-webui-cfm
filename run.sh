@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -e
 
 CONFIG_PATH="/data/options.json"
@@ -8,11 +9,11 @@ echo " Open WebUI CFM"
 echo "-----------------------------------------------------------"
 
 # -----------------------------------------------------------
-# Leer configuración de Home Assistant
+# Configuración Home Assistant
 # -----------------------------------------------------------
 
-WEBUI_AUTH=$(jq -r '.webui_auth // true' "${CONFIG_PATH}")
-OLLAMA_BASE_URL=$(jq -r '.ollama_base_url // empty' "${CONFIG_PATH}")
+WEBUI_AUTH="$(jq -r '.webui_auth // true' "${CONFIG_PATH}")"
+OLLAMA_BASE_URL="$(jq -r '.ollama_base_url // empty' "${CONFIG_PATH}")"
 
 # -----------------------------------------------------------
 # Directorio persistente
@@ -23,18 +24,19 @@ mkdir -p /data/open-webui
 export DATA_DIR="/data/open-webui"
 
 # -----------------------------------------------------------
-# Autenticación Open WebUI
+# Autenticación
 # -----------------------------------------------------------
 
 export WEBUI_AUTH="${WEBUI_AUTH}"
 
 # -----------------------------------------------------------
-# Secret persistente
+# WEBUI_SECRET_KEY persistente
 # -----------------------------------------------------------
 
 SECRET_FILE="/data/webui_secret_key"
 
 if [ ! -f "${SECRET_FILE}" ]; then
+
     echo "Generating WEBUI_SECRET_KEY..."
 
     python3 - <<'PY' > "${SECRET_FILE}"
@@ -43,6 +45,7 @@ print(secrets.token_hex(32))
 PY
 
     chmod 600 "${SECRET_FILE}"
+
 fi
 
 export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
@@ -52,20 +55,30 @@ export WEBUI_SECRET_KEY="$(cat "${SECRET_FILE}")"
 # -----------------------------------------------------------
 
 if [ -n "${OLLAMA_BASE_URL}" ]; then
+
     export OLLAMA_BASE_URL="${OLLAMA_BASE_URL}"
 
     echo "Ollama endpoint: ${OLLAMA_BASE_URL}"
+
 else
+
+    unset OLLAMA_BASE_URL
+
     echo "Ollama endpoint: not configured"
+
 fi
 
 # -----------------------------------------------------------
-# Open WebUI
+# Información
 # -----------------------------------------------------------
 
 echo "DATA_DIR: ${DATA_DIR}"
 echo "WEBUI_AUTH: ${WEBUI_AUTH}"
 echo "Starting Open WebUI..."
+
+# -----------------------------------------------------------
+# Arrancar Open WebUI
+# -----------------------------------------------------------
 
 cd /app/backend
 
