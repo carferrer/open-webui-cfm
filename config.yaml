@@ -12,18 +12,13 @@ startup: application
 boot: auto
 init: false
 
-ingress: true
-ingress_port: 8080
-
-panel_icon: "mdi:robot"
-panel_title: "Open WebUI"
-panel_admin: false
+webui: "http://[HOST]:[PORT:8080]"
 
 ports:
   8080/tcp: 3000
 
 ports_description:
-  8080/tcp: "Open WebUI direct access"
+  8080/tcp: "Open WebUI"
 
 options:
   webui_auth: true
