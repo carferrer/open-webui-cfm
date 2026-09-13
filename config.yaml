@@ -1,5 +1,5 @@
 name: "Open WebUI CFM"
-version: "2026.09.04"
+version: "2026.09.05"
 slug: "open_webui_cfm"
 description: "Open WebUI for Home Assistant"
 url: "https://github.com/carferrer/open-webui-cfm"
