@@ -52,6 +52,7 @@ echo "WEBUI_URL: ${WEBUI_URL}"
 echo "CORS_ALLOW_ORIGIN: ${CORS_ALLOW_ORIGIN}"
 echo "Starting Open WebUI..."
 
-cd /app/backend
+export ENABLE_WEBSOCKET_SUPPORT=false
 
+cd /app/backend
 exec bash start.sh
