@@ -1,3 +1,7 @@
+# Versión 2026.09.07 (2026-09-14)
+
+**Full Changelog**: https://github.com/carferrer/open-webui-cfm/compare/2026.09.06...2026.09.07
+
 # Versión 2026.09.06 (2026-09-13)
 
 **Full Changelog**: https://github.com/carferrer/open-webui-cfm/compare/2026.09.05...2026.09.06
